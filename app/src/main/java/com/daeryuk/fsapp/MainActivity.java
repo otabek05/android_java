@@ -1,7 +1,10 @@
 package com.daeryuk.fsapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -17,8 +20,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Intents facilitate communication between different component as well as between different applications
+
+        // Type of intents
+        // 1- Explicit Intents  ===> used specific components within the application, by specifying component class name
+        // 2- Implicit Intents
+
+        Button btn = findViewById(R.id.button);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                moveToSecond();
+            }
+        });
         Toast.makeText(this, "onCreate method has been called", Toast.LENGTH_SHORT).show();
 
+    }
+
+    public void moveToSecond() {
+        Intent intent = new Intent(this, Second.class);
+        startActivity(intent);
     }
 
 
