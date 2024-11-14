@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +12,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -21,6 +25,9 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
     Button btn;
     CheckBox box;
+    DatePicker date;
+    TextView three;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,13 +35,32 @@ public class MainActivity extends AppCompatActivity {
 
         box = findViewById(R.id.check);
         btn = findViewById(R.id.button);
+        date = findViewById(R.id.date);
+        three =  findViewById(R.id.three);
+        progressBar = findViewById(R.id.progressBar);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openCamera();
+               int day = date.getDayOfMonth();
+               int month = date.getMonth();
+               int year = date.getYear();
+               progressBar.setVisibility(View.VISIBLE);
+
+               new Handler().postDelayed(new Runnable() {
+                   @Override
+                   public void run() {
+                       String dateString = String.format("%02d-%02d-%d", day, month+1, year);
+                       three.setText(dateString);
+                       progressBar.setVisibility(View.GONE);
+                   }
+               }, 2000);
+
             }
         });
 
+
+
+        /*
         box.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -44,11 +70,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        */
+
 
     }
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
