@@ -7,22 +7,21 @@
     android:gravity="center"
     android:padding="16dp" >
 
-    <!-- TextView centered both horizontally and vertically -->
-<TextView
-android:id="@+id/textView"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="Second activity"
-android:textSize="30sp"
-    />
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:layout_marginBottom="30dp"
+
+        />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:id="@+id/second_btn"
+        android:text="@string/server"
 
-        android:text="Button" />
+        />
 
 
 </LinearLayout>

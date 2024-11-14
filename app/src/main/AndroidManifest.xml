@@ -15,6 +15,11 @@
         android:theme="@style/Theme.FSApp"
         tools:targetApi="31">
         <activity
+            android:name=".ScrollingActivity"
+            android:exported="false"
+            android:label="@string/title_activity_scrolling"
+            android:theme="@style/Theme.FSApp.NoActionBar" />
+        <activity
             android:name=".Second"
             android:exported="false" />
         <activity

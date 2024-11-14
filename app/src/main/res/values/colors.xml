@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="menu_button">#2e4053</color>
+    <color name="red" >#e81b2e</color>
 </resources>

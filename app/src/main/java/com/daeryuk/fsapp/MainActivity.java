@@ -9,10 +9,12 @@ import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +26,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     Button btn;
-    CheckBox box;
     DatePicker date;
     TextView three;
     ProgressBar progressBar;
@@ -32,12 +33,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        box = findViewById(R.id.check);
+        GridView gridView =  findViewById(R.id.gridView);
         btn = findViewById(R.id.button);
         date = findViewById(R.id.date);
         three =  findViewById(R.id.three);
         progressBar = findViewById(R.id.progressBar);
+
+        String[] items = {"Item1", "Item2", "Item3"};
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items);
+        gridView.setAdapter(adapter);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,17 +88,24 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int ItemId = item.getItemId();
-        if (ItemId == R.id.action_search) {
-            moveToSecond();
-        }else  {
-            Toast.makeText(this, "You selected Other menu", Toast.LENGTH_SHORT).show();
+        int itemId = item.getItemId(); // Correct variable name (changed from 'ItemId' to 'itemId')
+
+
+        if (itemId == R.id.action_search) {
+            // Handle search action (navigate to a new activity or show search UI)
+            Intent searchIntent = new Intent(this, Second.class); // Second is your search activity
+            startActivity(searchIntent);
+        } else if (itemId == R.id.action_home) {
+            // Handle home action (navigate to the main/home activity)
+            Intent homeIntent = new Intent(this, ScrollingActivity.class); // MainActivity is your home activity
+            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Clears the activity stack
+            startActivity(homeIntent);
+        }else {
+            return super.onOptionsItemSelected(item); // Default handling for unrecognized items
         }
 
-        return true;
+        return true; // Indicate that the menu item was handled
     }
-
-
     // Intents facilitate communication between different component as well as between different applications
 
     // Type of intents
@@ -104,8 +116,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void moveToSecond() {
         Intent intent = new Intent(this, Second.class);
-
-        intent.putExtra("username", "otabek");
         startActivity(intent);
     }
 

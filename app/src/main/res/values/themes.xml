@@ -8,4 +8,13 @@
     </style>
 
     <style name="Theme.FSApp" parent="Base.Theme.FSApp" />
+
+    <style name="Theme.FSApp.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.FSApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.FSApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
