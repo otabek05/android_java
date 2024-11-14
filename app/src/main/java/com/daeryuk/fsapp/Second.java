@@ -12,7 +12,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.daeryuk.fsapp.adapters.MyCustomAdapter;
 import com.daeryuk.fsapp.models.Country;
 
 import java.util.ArrayList;
@@ -46,15 +45,6 @@ public class Second extends AppCompatActivity {
         );
 
 
-        MyCustomAdapter adapter = new MyCustomAdapter(this, countries);
-
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                list.setAdapter(adapter);
-               // moveToFirst();
-            }
-        });
     }
 
 

@@ -26,7 +26,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.daeryuk.fsapp.adapters.MyRecycleViewAdapter;
+import com.daeryuk.fsapp.adapters.ProductRecycleAdapter;
 import com.daeryuk.fsapp.models.Country;
+import com.daeryuk.fsapp.models.Product;
 import com.daeryuk.fsapp.repo.ItemClickListener;
 
 import java.util.ArrayList;
@@ -37,59 +39,23 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity  implements ItemClickListener {
 
     List<Country> countryList = new ArrayList<>();
+    List<Product> products = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        MyRecycleViewAdapter adapter;
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 
-        countryList.add(new Country("United States", "USD"));
-        countryList.add(new Country("Canada", "CAD"));
-        countryList.add(new Country("Japan", "JPY"));
-        countryList.add(new Country("Germany", "EUR"));
-        countryList.add(new Country("India", "INR"));
-        countryList.add(new Country("India", "INR"));
-        countryList.add(new Country("India", "INR"));
-        countryList.add(new Country("India", "INR"));
-        countryList.add(new Country("India", "INR"));
-        countryList.add(new Country("India", "INR"));
-        countryList.add(new Country("India", "INR"));
-        countryList.add(new Country("India", "INR"));
-        countryList.add(new Country("India", "INR"));
-        countryList.add(new Country("India", "INR"));
-        countryList.add(new Country("India", "INR"));
-        countryList.add(new Country("India", "INR"));
-        countryList.add(new Country("India", "INR"));
-        countryList.add(new Country("India", "INR"));
-        countryList.add(new Country("India", "INR"));
-        countryList.add(new Country("India", "INR"));
-        countryList.add(new Country("India", "INR"));
-        countryList.add(new Country("India", "INR"));
-        countryList.add(new Country("India", "INR"));
+        products.add(new Product("Olcha", R.drawable.ass, 10.99));
+        products.add(new Product("Olxo'ri", R.drawable.box, 10.99));
+        products.add(new Product("Boxing is very goog", R.drawable.toss, 10.33));
+        products.add(new Product("Olmacha olmachag", R.drawable.brain, 10.99));
 
-
-        adapter = new MyRecycleViewAdapter(countryList);
-       adapter.setClickListener(this);
+       ProductRecycleAdapter adapter = new ProductRecycleAdapter(products);
        recyclerView.setLayoutManager(layoutManager);
        recyclerView.setAdapter(adapter);
-
-
-
-        /*
-        box.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b ) {
-                    // Code to execute
-                    Toast.makeText(MainActivity.this, "Checkbox is chekcked", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        */
-
 
     }
 
@@ -119,35 +85,8 @@ public class MainActivity extends AppCompatActivity  implements ItemClickListene
 
         return true; // Indicate that the menu item was handled
     }
-    // Intents facilitate communication between different component as well as between different applications
 
-    // Type of intents
-    // 1- Explicit Intents  ===> used specific components within the application, by specifying component class name
-    // 2- Implicit Intents  ===> used for extenal services in the phone such as browser or camera
 
-   // Explicit Intents
-
-    public void moveToSecond() {
-        Intent intent = new Intent(this, Second.class);
-        startActivity(intent);
-    }
-
-    // Implicit Intents
-
-    public void openNewPage() {
-        Uri webpage = Uri.parse("https://daeryuk.org");
-
-        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
-        startActivity(intent);
-    }
-
-    public void openCamera()
-    {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if(intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        }
-    }
 
 
     @Override

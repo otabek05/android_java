@@ -30,8 +30,8 @@ public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdap
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_country,parent, false);
-        return new MyViewHolder(itemView);
+       // View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_country,parent, false);
+        return null;
     }
 
     @Override
@@ -51,8 +51,7 @@ public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdap
         TextView currency;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.country_name);
-            currency = itemView.findViewById(R.id.country_name);
+
 
             itemView.setOnClickListener(this);
         }
