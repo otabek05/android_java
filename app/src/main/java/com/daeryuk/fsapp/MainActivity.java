@@ -5,24 +5,29 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import android.provider.MediaStore;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
 
 public class MainActivity extends AppCompatActivity {
-
+    Button btn;
+    CheckBox box;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button btn = findViewById(R.id.button);
+        box = findViewById(R.id.check);
+        btn = findViewById(R.id.button);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -30,9 +35,39 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Toast.makeText(this, "onCreate method has been called", Toast.LENGTH_SHORT).show();
+        box.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b ) {
+                    // Code to execute
+                    Toast.makeText(MainActivity.this, "Checkbox is chekcked", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
     }
+
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.my_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int ItemId = item.getItemId();
+        if (ItemId == R.id.action_search) {
+            moveToSecond();
+        }else  {
+            Toast.makeText(this, "You selected Other menu", Toast.LENGTH_SHORT).show();
+        }
+
+        return true;
+    }
+
 
     // Intents facilitate communication between different component as well as between different applications
 
@@ -44,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void moveToSecond() {
         Intent intent = new Intent(this, Second.class);
+
+        intent.putExtra("username", "otabek");
         startActivity(intent);
     }
 
@@ -65,48 +102,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-   // Life Cycles execpt onCreate()
-    @Override
-    protected void onStart() {
-        super.onStart();
 
-        Toast.makeText(this, "onStart method has been called", Toast.LENGTH_SHORT).show();
-    }
-
-
-    @Override
-    protected  void onResume() {
-        super.onResume();
-
-        Toast.makeText(this, "onResume method has been called", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    protected  void onPause() {
-        super.onPause();
-        Toast.makeText(this, "onPause method has been called", Toast.LENGTH_LONG).show();
-
-    }
-
-    @Override
-    protected  void onStop() {
-        super.onStop();
-
-        Toast.makeText(this, "onStop method has been called", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-
-        Toast.makeText(this, "onRestart method has been called", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    protected void  onDestroy() {
-        super.onDestroy();
-
-
-        Toast.makeText(this, "onDestroy method has been called", Toast.LENGTH_SHORT).show();
-    }
 }
