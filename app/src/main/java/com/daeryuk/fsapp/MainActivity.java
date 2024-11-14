@@ -22,46 +22,59 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.daeryuk.fsapp.adapters.MyRecycleViewAdapter;
+import com.daeryuk.fsapp.models.Country;
+import com.daeryuk.fsapp.repo.ItemClickListener;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity {
-    Button btn;
-    DatePicker date;
-    TextView three;
-    ProgressBar progressBar;
+public class MainActivity extends AppCompatActivity  implements ItemClickListener {
+
+    List<Country> countryList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        GridView gridView =  findViewById(R.id.gridView);
-        btn = findViewById(R.id.button);
-        date = findViewById(R.id.date);
-        three =  findViewById(R.id.three);
-        progressBar = findViewById(R.id.progressBar);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        MyRecycleViewAdapter adapter;
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 
-        String[] items = {"Item1", "Item2", "Item3"};
+        countryList.add(new Country("United States", "USD"));
+        countryList.add(new Country("Canada", "CAD"));
+        countryList.add(new Country("Japan", "JPY"));
+        countryList.add(new Country("Germany", "EUR"));
+        countryList.add(new Country("India", "INR"));
+        countryList.add(new Country("India", "INR"));
+        countryList.add(new Country("India", "INR"));
+        countryList.add(new Country("India", "INR"));
+        countryList.add(new Country("India", "INR"));
+        countryList.add(new Country("India", "INR"));
+        countryList.add(new Country("India", "INR"));
+        countryList.add(new Country("India", "INR"));
+        countryList.add(new Country("India", "INR"));
+        countryList.add(new Country("India", "INR"));
+        countryList.add(new Country("India", "INR"));
+        countryList.add(new Country("India", "INR"));
+        countryList.add(new Country("India", "INR"));
+        countryList.add(new Country("India", "INR"));
+        countryList.add(new Country("India", "INR"));
+        countryList.add(new Country("India", "INR"));
+        countryList.add(new Country("India", "INR"));
+        countryList.add(new Country("India", "INR"));
+        countryList.add(new Country("India", "INR"));
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items);
-        gridView.setAdapter(adapter);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               int day = date.getDayOfMonth();
-               int month = date.getMonth();
-               int year = date.getYear();
-               progressBar.setVisibility(View.VISIBLE);
 
-               new Handler().postDelayed(new Runnable() {
-                   @Override
-                   public void run() {
-                       String dateString = String.format("%02d-%02d-%d", day, month+1, year);
-                       three.setText(dateString);
-                       progressBar.setVisibility(View.GONE);
-                   }
-               }, 2000);
-
-            }
-        });
+        adapter = new MyRecycleViewAdapter(countryList);
+       adapter.setClickListener(this);
+       recyclerView.setLayoutManager(layoutManager);
+       recyclerView.setAdapter(adapter);
 
 
 
@@ -137,5 +150,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+    @Override
+    public void onClick(View v, int position) {
+        Toast.makeText(this, "You choose" + countryList.get(position).getName(), Toast.LENGTH_SHORT).show();
+    }
 }
